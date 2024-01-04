@@ -14,16 +14,29 @@ router.get('/', async (req, res) => {
       res.status(404).json({message: 'No entries found.'});
       return;
     }
-    res.status(404).json(tags);
+    res.status(200).json(tags);
   }
   catch(err) {
     res.status(500).json(err);
   }
 });
 
-router.get('/:id', (req, res) => {
+router.get('/:id', async (req, res) => {
   // find a single tag by its `id`
   // be sure to include its associated Product data
+  try {
+    const tags = await Tag.findByPk(req.params.id, {
+      include: [{model: Product, through: ProductTag, as: 'tagToProduct'}],
+    });
+    if(!tags) {
+      res.status(404).json({message: 'No entries found.'});
+      return;
+    }
+    res.status(200).json(tags);
+  }
+  catch(err) {
+    res.status(500).json(err);
+  }
 });
 
 router.post('/', (req, res) => {
