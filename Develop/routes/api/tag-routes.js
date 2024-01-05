@@ -72,7 +72,7 @@ router.put('/:id', async (req, res) => {
 router.delete('/:id', async (req, res) => {
   // delete on tag by its `id` value
   try {
-    const deleteTags = await Tag.destroy({
+     await Tag.destroy({
       tag_name: req.body.tag_name,
     },
     {
@@ -80,8 +80,10 @@ router.delete('/:id', async (req, res) => {
       id: req.params.id,
     }
   }
-    );
-    return deleteTags.json(tagsDeleted);
+    ).then(deletedTag => {
+      return res.json(deletedTag);
+    })
+   
   }
   catch(err) {
     res.status(500).json(err);
