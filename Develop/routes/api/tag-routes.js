@@ -80,9 +80,10 @@ router.delete('/:id', async (req, res) => {
       id: req.params.id,
     }
   }
-    ).then(deletedTag => {
-      return res.json(deletedTag);
-    })
+    )
+    deletedTag => {
+      return deletedTag;
+    }
    
   }
   catch(err) {

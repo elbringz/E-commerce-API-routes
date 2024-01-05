@@ -125,9 +125,10 @@ router.delete('/:id', async (req, res) => {
       where: {
         id: req.params.id,
       }
-    }).then( deletedProduct => {
-      return res.json(deletedProduct);
-    })
+    });
+     deletedProduct => {
+      return deletedProduct;
+    }
     
   }
   catch(err) {

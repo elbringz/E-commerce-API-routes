@@ -80,9 +80,10 @@ router.delete('/:id', async (req, res) => {
       where: {
         id: req.params.id,
       }
-    }).then(deletedCategory => {
-      return res.json(deletedCategory);
     })
+    deletedCategory => {
+      return deletedCategory;
+    }
     
   }
   catch(err) {
