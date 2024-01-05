@@ -8,15 +8,19 @@ router.get('/', async (req, res) => {
   // find all products
   // be sure to include its associated Category and Tag data
   try {
+    //finds all products
     const products = await Product.findAll({
       include: [{model: Category, model: Tag, through: ProductTag, as: 'productToTag'}],
     });
+    //if no products found display 404 error code
     if(!products) {
       res.status(404).json({message: 'No entries found.'});
       return;
     }
+    //If accepted display products and 200 status
     res.status(200).json(products);
   }
+  //if error display error with 500 status
   catch(err) {
     res.status(500).json(err);
   }
@@ -27,15 +31,19 @@ router.get('/:id', async (req, res) => {
   // find a single product by its `id`
   // be sure to include its associated Category and Tag data
   try {
+    //finds single product by primary key (id)
     const products = await Product.findByPk(req.params.id, {
       include: [{model: Category, model: Tag, through: ProductTag, as: 'productToTag'}],
     });
+    //if not found display 404 status 
     if(!products) {
       res.status(404).json({message: 'No entries found.'});
       return;
     }
+    //if found display results with 200 status
     res.status(200).json(products);
   }
+  //if error display 500 server error
   catch(err) {
     res.status(500).json(err);
   }
@@ -120,17 +128,21 @@ router.put('/:id', (req, res) => {
 
 router.delete('/:id', async (req, res) => {
   // delete one product by its `id` value
+  // Couldn't get delete routes working properly
   try {
+    //deletes product that belongs to the given id
      await Product.destroy({
       where: {
         id: req.params.id,
       }
     });
+    //returns deleted product
      deletedProduct => {
       return deletedProduct;
     }
     
   }
+  //if error display 500 status
   catch(err) {
     res.status(500).json(err);
   }
