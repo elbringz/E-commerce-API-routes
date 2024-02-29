@@ -9,4 +9,4 @@ https://sequelize.org/docs/v6/
 https://www.digitalocean.com/community/tutorials/how-to-use-sequelize-with-node-js-and-mysql
 
 ## Demonstration Video
-https://drive.google.com/file/d/1Bz0sQqIrdSBMiEbIw1V95mDfT9u1nEXw/view
+https://drive.google.com/file/d/17apntk-eGanQvkkb_Ux34W4tQePQHiaA/view
