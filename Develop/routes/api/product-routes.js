@@ -128,18 +128,16 @@ router.put('/:id', (req, res) => {
 
 router.delete('/:id', async (req, res) => {
   // delete one product by its `id` value
-  // Couldn't get delete routes working properly
+  
   try {
     //deletes product that belongs to the given id
-     await Product.destroy({
+     const deletedProduct = await Product.destroy({
       where: {
         id: req.params.id,
       }
-    });
+    })
     //returns deleted product
-     deletedProduct => {
-      return deletedProduct;
-    }
+     res.status(200).json(deletedProduct);
     
   }
   //if error display 500 status

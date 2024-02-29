@@ -84,21 +84,16 @@ router.put('/:id', async (req, res) => {
 
 router.delete('/:id', async (req, res) => {
   // delete on tag by its `id` value
-  //Wasn't able to get this route to work.
+  
   try {
-     await Tag.destroy({
-      tag_name: req.body.tag_name,
-    },
-    {
+    const deletedTag = await Tag.destroy({
     where: {
       id: req.params.id,
     }
   }
     )
     //returns deleted tag
-    deletedTag => {
-      return deletedTag;
-    }
+    res.status(200).json(deletedTag);
    
   }
   //if error status 500 and return error
